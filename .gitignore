@@ -1,0 +1,58 @@
+
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+myvenv/
+.myvenv
+
+# ===== Environment variables =====
+.env
+.env.*
+
+# ===== Logs =====
+*.log
+
+# ===== OS files =====
+.DS_Store
+Thumbs.db
+
+# ===== IDE / Editors =====
+.vscode/
+.idea/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== ML / Data =====
+data/
+datasets/
+*.csv
+*.parquet
+*.pkl
+*.joblib
+
+# ===== MLflow =====
+mlruns/
+
+artifacts/
+models/
+checkpoints/
+outputs/
+wandb/
+
+# ===== Build / Cache =====
+build/
+dist/
+*.egg-info/
+
+# ===== Docker =====
+docker-compose.override.yml
+
