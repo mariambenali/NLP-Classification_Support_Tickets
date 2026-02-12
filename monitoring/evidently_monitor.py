@@ -50,7 +50,13 @@ def run_evidently_monitoring():
 
     # define evidently mappin
     data_definition = DataDefinition(
-        categorical_columns=["queue", "priority", "language", "type", "prediction"],
+        categorical_columns=[
+            "queue",
+            "priority",
+            "language",
+            "type",
+            "prediction"
+            ],
         classification=[
             MulticlassClassification(
                 target="type",
@@ -94,7 +100,7 @@ def run_evidently_monitoring():
             reports_path,
             "classification_report.html")
     )
-
     print("Monitoring terminé")
 
 run_evidently_monitoring()
+
