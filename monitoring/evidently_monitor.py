@@ -63,13 +63,14 @@ def run_evidently_monitoring():
             "priority",
             "language",
             "type",
-            "prediction"
-            ],
+            "prediction",
+        ],
         classification=[
             MulticlassClassification(
                 target="type",
-                prediction_labels="prediction")
-        ]
+                prediction_labels="prediction",
+            ),
+        ],
     )
     reference_dataset = Dataset.from_pandas(
         reference_data,
