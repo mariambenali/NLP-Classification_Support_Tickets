@@ -28,12 +28,12 @@ def run_evidently_monitoring():
     # generate predictions
     # embedding & normalize
     reference_embeddings = model_embeddings.encode(
-        reference_data["clean_text"].tolist(),
-        normalize_embeddings = True)
-    
+        reference_data["clean_text"].tolist(), normalize_embeddings=True
+    )
+
     current_embeddings = model_embeddings.encode(
-        current_data["clean_text"].tolist(),
-        normalize_embeddings = True)
+        current_data["clean_text"].tolist(), normalize_embeddings=True
+    )
 
     # prediction
     reference_data["prediction"] = model.predict(reference_embeddings)
@@ -41,44 +41,37 @@ def run_evidently_monitoring():
 
     # define evidently mappin
     data_definition = DataDefinition(
-        categorical_columns = ["queue", "priority", "language", "type", "prediction"],
-        classification =[
-            MulticlassClassification(
-                target = "type",
-                prediction_labels = "prediction"
-            )
-        ]
+        categorical_columns=["queue", "priority", "language", "type", "prediction"],
+        classification=[
+            MulticlassClassification(target="type", prediction_labels="prediction")
+        ],
     )
     reference_dataset = Dataset.from_pandas(
-        reference_data,
-        data_definition = data_definition
+        reference_data, data_definition=data_definition
     )
 
-    current_dataset = Dataset.from_pandas(
-        current_data,
-        data_definition = data_definition
-    )
+    current_dataset = Dataset.from_pandas(current_data, data_definition=data_definition)
 
     # report data drift
     drift_result = Report(metrics=[DataDriftPreset()]).run(
-        reference_dataset,
-        current_dataset
+        reference_dataset, current_dataset
     )
     classification_result = Report(metrics=[ClassificationPreset()]).run(
-        reference_dataset,
-        current_dataset
+        reference_dataset, current_dataset
     )
     # save the report
     reports_path = os.path.join(BASE_DIR, "reports")
     os.makedirs(reports_path, exist_ok=True)
 
     # data drift
-    drift_result.save_html(os.path.join(reports_path,
-                                        "data_drift_report.html"))
+    drift_result.save_html(os.path.join(reports_path, "data_drift_report.html"))
 
     # Classification
-    classification_result.save_html(os.path.join(reports_path,
-                                                 "classification_report.html"))
+    classification_result.save_html(
+        os.path.join(reports_path, "classification_report.html")
+    )
 
     print("Monitoring terminé")
+
+
 run_evidently_monitoring()
