@@ -36,27 +36,27 @@ def run_evidently_monitoring():
         normalize_embeddings = True)
 
     # prediction
-    reference_data["prediction"]= model.predict(reference_embeddings)
-    current_data["prediction"]= model.predict(current_embeddings)
+    reference_data["prediction"] = model.predict(reference_embeddings)
+    current_data["prediction"] = model.predict(current_embeddings)
 
     # define evidently mappin
-    data_definition= DataDefinition(
-        categorical_columns= ["queue", "priority", "language", "type", "prediction"],
-        classification=[
+    data_definition = DataDefinition(
+        categorical_columns = ["queue", "priority", "language", "type", "prediction"],
+        classification =[
             MulticlassClassification(
-                target= "type",
-                prediction_labels= "prediction"
+                target = "type",
+                prediction_labels = "prediction"
             )
         ]
     )
     reference_dataset = Dataset.from_pandas(
         reference_data,
-        data_definition= data_definition
+        data_definition = data_definition
     )
 
-    current_dataset= Dataset.from_pandas(
+    current_dataset = Dataset.from_pandas(
         current_data,
-        data_definition= data_definition
+        data_definition = data_definition
     )
 
     # report data drift
@@ -73,10 +73,12 @@ def run_evidently_monitoring():
     os.makedirs(reports_path, exist_ok=True)
 
     # data drift
-    drift_result.save_html(os.path.join(reports_path, "data_drift_report.html"))
+    drift_result.save_html(os.path.join(reports_path,
+                                        "data_drift_report.html"))
 
     # Classification
-    classification_result.save_html(os.path.join(reports_path, "classification_report.html"))
+    classification_result.save_html(os.path.join(reports_path,
+                                                 "classification_report.html"))
 
     print("Monitoring terminé")
 run_evidently_monitoring()
