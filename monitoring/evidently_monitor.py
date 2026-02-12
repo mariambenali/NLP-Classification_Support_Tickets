@@ -9,7 +9,9 @@ import os
 def run_evidently_monitoring():
     # load data
     BASE_DIR = "/Users/miriambenali/Desktop/Project-Simplon/NLP-Classification_Support_Tickets--with-MLOps"
-    file_path = os.path.join(BASE_DIR, "data/processed/tickets_clean.csv")
+    file_path = os.path.join(
+        BASE_DIR, 
+        "data/processed/tickets_clean.csv")
     df = pd.read_csv(file_path)
 
     # load model
@@ -43,7 +45,9 @@ def run_evidently_monitoring():
     data_definition = DataDefinition(
         categorical_columns=["queue", "priority", "language", "type", "prediction"],
         classification=[
-            MulticlassClassification(target="type", prediction_labels="prediction")
+            MulticlassClassification(
+                target="type", 
+                prediction_labels="prediction")
         ],
     )
     reference_dataset = Dataset.from_pandas(
@@ -64,11 +68,16 @@ def run_evidently_monitoring():
     os.makedirs(reports_path, exist_ok=True)
 
     # data drift
-    drift_result.save_html(os.path.join(reports_path, "data_drift_report.html"))
+    drift_result.save_html(
+        os.path.join(
+            reports_path, 
+            "data_drift_report.html"))
 
     # Classification
     classification_result.save_html(
-        os.path.join(reports_path, "classification_report.html")
+        os.path.join(
+            reports_path, 
+            "classification_report.html")
     )
 
     print("Monitoring terminé")
