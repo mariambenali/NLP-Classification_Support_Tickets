@@ -30,9 +30,15 @@ def run_evidently_monitoring():
 
     # Split the data to simulate "past" and "present" reference_data and current_data
 
-    reference_data = df.sample(5000, random_state=42)
+    reference_data = df.sample(
+        5000,
+        random_state=42
+        )
 
-    current_data = df.sample(5000, random_state=0)
+    current_data = df.sample(
+        5000,
+        random_state=0
+        )
 
     # generate predictions
     # embedding & normalize
@@ -105,5 +111,7 @@ def run_evidently_monitoring():
             "classification_report.html")
     )
     print("Monitoring terminé")
+
+
 
 run_evidently_monitoring()
