@@ -28,7 +28,7 @@ def run_evidently_monitoring():
         "all-MiniLM-L6-v2"
     )
 
-    # Split the data to simulate "past" and "present" reference_data and current_data
+    # Split the data to simulate "past" and "present"
 
     reference_data = df.sample(
         5000,
