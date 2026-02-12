@@ -3,7 +3,6 @@ sentence-transformers
 matplotlib
 nltk
 torch 
-torchvision 
-torchaudio
 chromadb
 scikit-learn
+evidently
