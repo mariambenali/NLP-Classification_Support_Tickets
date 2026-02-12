@@ -87,11 +87,13 @@ def run_evidently_monitoring():
         current_dataset
     )
 
-    classification_result = Report(
-        metrics=[ClassificationPreset()]
+    classification_result = (
+        Report(
+            metrics=[ClassificationPreset()]
         ).run(
             reference_dataset,
             current_dataset
+        )
     )
     # save the report
     reports_path = os.path.join(
@@ -103,7 +105,8 @@ def run_evidently_monitoring():
     drift_result.save_html(
         os.path.join(
             reports_path,
-            "data_drift_report.html")
+            "data_drift_report.html"
+        )
     )
 
     # Classification
