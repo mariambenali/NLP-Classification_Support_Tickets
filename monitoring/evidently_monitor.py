@@ -8,7 +8,10 @@ import os
 
 def run_evidently_monitoring():
     # load data
-    BASE_DIR = "/Users/miriambenali/Desktop/Project-Simplon/NLP-Classification_Support_Tickets--with-MLOps"
+    BASE_DIR = (
+        "/Users/miriambenali/Desktop/Project-Simplon/"
+        "NLP-Classification_Support_Tickets--with-MLOps"
+    )
     file_path = os.path.join(
         BASE_DIR,
         "data/processed/tickets_clean.csv")
