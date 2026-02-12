@@ -24,7 +24,9 @@ def run_evidently_monitoring():
     model = load(model_path)
 
     # model embeddings
-    model_embeddings = SentenceTransformer("all-MiniLM-L6-v2")
+    model_embeddings = SentenceTransformer(
+        "all-MiniLM-L6-v2"
+        )
 
     # Split the data to simulate "past" and "present" reference_data and current_data
 
@@ -70,7 +72,8 @@ def run_evidently_monitoring():
 
     current_dataset = Dataset.from_pandas(
         current_data,
-        data_definition=data_definition)
+        data_definition=data_definition
+        )
 
     # report data drift
     drift_result = Report(metrics=[DataDriftPreset()]).run(
@@ -92,7 +95,8 @@ def run_evidently_monitoring():
     drift_result.save_html(
         os.path.join(
             reports_path,
-            "data_drift_report.html"))
+            "data_drift_report.html")
+    )
 
     # Classification
     classification_result.save_html(
@@ -103,4 +107,3 @@ def run_evidently_monitoring():
     print("Monitoring terminé")
 
 run_evidently_monitoring()
-
