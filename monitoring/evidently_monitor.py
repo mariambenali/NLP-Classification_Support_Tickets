@@ -88,7 +88,8 @@ def run_evidently_monitoring():
     )
 
     classification_result = Report(
-        metrics=[ClassificationPreset()]).run(
+        metrics=[ClassificationPreset()]
+        ).run(
             reference_dataset,
             current_dataset
     )
