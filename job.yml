@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  nlp-pipeline-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: nlp-pipeline
+        image: image: mariben404/nlp-pipeline:latest
+      restartPolicy: Never
+  backoffLimit: 2
