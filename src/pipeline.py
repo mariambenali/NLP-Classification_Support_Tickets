@@ -7,11 +7,8 @@ import joblib
 
 
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-BASE_DIR = os.path.dirname(
-    os.path.dirname(
-    os.path.abspath(__file__)
-    ))
 model_path = os.path.join(
     BASE_DIR,
     "models/rfc_ticket_model.pkl")
@@ -49,7 +46,6 @@ def pipeline_nlp():
         index=False)
 
     print("Pipeline terminé avec succès.")
-
 
 if __name__ == "__main__":
     pipeline_nlp()
