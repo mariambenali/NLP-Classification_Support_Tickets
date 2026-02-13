@@ -1,19 +1,20 @@
 import pandas as pd
-from preprocessing import preprocess_dataframe, preprocess_embeddings
-from training import load_model, predict_model
+from preprocessing import cleaning_data, preprocess_dataframe
+from embeddings import preprocess_embeddings
+from training import model_training
 import os
+import joblib
 
 
-'''
-Charger données
-Appeler preprocessing
-Charger modèle
-Faire prédictions
-Sauvegarder résultats
-Logguer métriques
-'''
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+    os.path.abspath(__file__)
+    ))
+model_path = os.path.join(
+    BASE_DIR,
+    "models/rfc_ticket_model.pkl")
 
 dir_path = os.path.join(
     BASE_DIR,
@@ -21,7 +22,6 @@ dir_path = os.path.join(
     "processed",
     "tickets_clean.csv"
 )
-
 
 def pipeline_nlp():
     # load_data
@@ -34,15 +34,18 @@ def pipeline_nlp():
     texts = df["text"].tolist()
     embeddings = preprocess_embeddings(texts)
 
-    # load_model
-    model = load_model(os.path.join(BASE_DIR, "models", "rfc_ticket_model.pkl"))
+    #load_model
+    model = joblib.load(model_path)
 
-    # predictions
-    prediction = predict_model(model, ["text"])
-    df["prediction"] = prediction
+    #training
+    model_training= model_training(embeddings)
 
     # save_model
-    df.to_csv(os.path.join(BASE_DIR, "data", "predictions.csv"), index=False)
+    df.to_csv(os.path.join(
+        BASE_DIR,
+        "data",
+        "predictions.csv"),
+        index=False)
 
     print("Pipeline terminé avec succès.")
 

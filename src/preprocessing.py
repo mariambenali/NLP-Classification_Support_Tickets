@@ -3,7 +3,7 @@ import os
 import re
 import nltk
 from nltk.corpus import stopwords
-from sentence_transformers import SentenceTransformer
+
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,13 +35,3 @@ def preprocess_dataframe(df, clean_text):
 
 
 
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-embedding_model = SentenceTransformer(MODEL_NAME)
-
-def preprocess_embeddings(clean_text):
-    embeddings = embedding_model.encode(
-        clean_text,
-        show_progress_bar=True,
-        convert_to_numpy=True
-    )
-    return embeddings
