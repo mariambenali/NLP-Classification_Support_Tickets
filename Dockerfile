@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python", "evidently_monitor.py"]
+CMD ["python", "monitoring/evidently_monitor.py"]
