@@ -47,5 +47,6 @@ def pipeline_nlp():
 
     print("Pipeline terminé avec succès.")
 
-if __name__ == "__main__":
-    pipeline_nlp()
+
+'''if __name__ == "__main__":
+    pipeline_nlp()'''
