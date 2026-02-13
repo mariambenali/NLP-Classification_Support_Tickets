@@ -1,7 +1,7 @@
 import pandas as pd
-from preprocessing import cleaning_data, preprocess_dataframe
+from preprocessing import preprocess_dataframe
 from embeddings import preprocess_embeddings
-from training import model_training
+from training import predict_model
 import os
 import joblib
 
@@ -37,8 +37,9 @@ def pipeline_nlp():
     #load_model
     model = joblib.load(model_path)
 
-    #training
-    model_training= model_training(embeddings)
+    # predictions
+    predictions = predict_model(model, embeddings)
+    df["prediction"] = predictions
 
     # save_model
     df.to_csv(os.path.join(
